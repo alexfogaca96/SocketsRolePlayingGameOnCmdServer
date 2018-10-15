@@ -1,0 +1,5 @@
+<id>1</id><t>Texto 1</t><o1>Primeira opção</o1><l1>2</l1><o2>Segunda opção</o2><l2>3</l2><o3>Terceira opção</o3><l3>4</l3><o4>Quarta opção</o4><l4>5</l4>
+<id>2</id><t>Texto 2</t><o1>Primeira opção</o1><l1>1</l1><o2>Segunda opção</o2><l2>2</l2><o3>Terceira opção</o3><l3>3</l3><o4>Quarta opção</o4><l4>4</l4>
+<id>3</id><t>Texto 3</t><o1>Primeira opção</o1><l1>1</l1><o2>Segunda opção</o2><l2>2</l2><o3>Terceira opção</o3><l3>3</l3><o4>Quarta opção</o4><l4>4</l4>
+<id>4</id><t>Texto 4</t><o1>Primeira opção</o1><l1>1</l1><o2>Segunda opção</o2><l2>2</l2><o3>Terceira opção</o3><l3>3</l3><o4>Quarta opção</o4><l4>4</l4>
+<id>5</id><t>Texto 5</t><o1>Primeira opção</o1><l1>1</l1><o2>Segunda opção</o2><l2>2</l2><o3>Terceira opção</o3><l3>3</l3><o4>Quarta opção</o4><l4>4</l4>
