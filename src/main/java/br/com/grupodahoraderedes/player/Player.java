@@ -1,5 +1,7 @@
 package br.com.grupodahoraderedes.player;
 
+import java.util.List;
+
 public class Player
 {
 	private Profession profession;
@@ -58,14 +60,14 @@ public class Player
 		return health;
 	}
 
-	public String getInventory()
+	public List<String> getInventory()
 	{
-		return inventory.toString();
+		return inventory.inventoryItens();
 	}
 
-	public String getGear()
+	public List<String> getGear()
 	{
-		return gear.toString();
+		return gear.equipments();
 	}
 
 	public void equipItem(

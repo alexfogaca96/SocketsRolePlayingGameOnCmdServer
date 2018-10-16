@@ -1,11 +1,18 @@
 package br.com.grupodahoraderedes.player;
 
-import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Inventory
 {
-	private final List<String> inventoryItens = Collections.emptyList();
+	private final List<String> inventoryItens = new LinkedList<>();
+
+	public Inventory()
+	{
+		inventoryItens.add( "Torch" );
+		inventoryItens.add( "Rope" );
+		inventoryItens.add( "restinho do marmitex" );
+	}
 
 	public void add(
 		final String item
@@ -19,6 +26,11 @@ public class Inventory
 	)
 	{
 		return inventoryItens.remove( item );
+	}
+
+	public List<String> inventoryItens()
+	{
+		return inventoryItens;
 	}
 
 	@Override

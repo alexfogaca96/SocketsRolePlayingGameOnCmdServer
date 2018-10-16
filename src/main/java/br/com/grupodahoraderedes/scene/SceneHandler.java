@@ -49,18 +49,14 @@ public class SceneHandler
 	private void gameLoop()
 		throws IOException
 	{
-		Scene nextScene = null;
 		Scene scene = SceneManager.getStartingScene();
 		while (true) {
 			writeSceneToPlayer( scene );
-			while (true) {
-				final String choice = waitForChoiceInput( scene.optionsSize() );
-				nextScene = SceneManager.getChosenScene( player, writer, scene, choice );
-				if (nextScene != null && !nextScene.equals( scene )) {
-					break;
-				}
+			final String choice = waitForChoiceInput( scene.optionsSize() );
+			scene = SceneManager.getChosenScene( player, writer, scene, choice );
+			if (scene == null) {
+				continue;
 			}
-			scene = nextScene;
 			applySceneConsequencesOnPlayer( scene );
 		}
 	}

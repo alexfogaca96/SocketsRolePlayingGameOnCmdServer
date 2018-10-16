@@ -68,16 +68,28 @@ abstract class SceneManager
 		final String[] splittedChoice = choice.split( " " );
 		switch (splittedChoice[ 0 ]) {
 			case "inventory":
-				if (splittedChoice.length == 1) {
+				if (splittedChoice.length == 2) {
 					player.addToInventory( splittedChoice[ 1 ] );
 				}
-				writer.println( player.getInventory() );
+				final List<String> inventory = player.getInventory();
+				writer.println( inventory.size() + 2 );
+				writer.println( "Inventory {" );
+				for (final String item : inventory) {
+					writer.println( "  " + item );
+				}
+				writer.println( "}" );
 				break;
 			case "equip":
-				if (splittedChoice.length == 1) {
+				if (splittedChoice.length == 2) {
 					player.equipItem( splittedChoice[ 1 ] );
 				}
-				writer.println( player.getGear() );
+				final List<String> gear = player.getGear();
+				writer.println( gear.size() + 2 );
+				writer.println( "Equip {" );
+				for (final String equipment : gear) {
+					writer.println( "  " + equipment );
+				}
+				writer.println( "}" );
 				break;
 			default:
 				writer.print( "Essa ação não pode ser executada..." );
