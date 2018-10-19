@@ -22,6 +22,8 @@ public class SceneHandler
 	private final BufferedReader reader;
 	private final PrintWriter writer;
 
+	private Scene scene;
+	
 	public SceneHandler(
 		final UserConnectionServer server,
 		final String playerIp,
@@ -49,23 +51,25 @@ public class SceneHandler
 	private void gameLoop()
 		throws IOException
 	{
-		Scene scene = SceneManager.getStartingScene();
+		scene = SceneManager.getStartingScene();
 		while (true) {
-			writeSceneToPlayer( scene );
-			final String choice = waitForChoiceInput( scene.optionsSize() );
-			scene = SceneManager.getChosenScene( player, writer, scene, choice );
+			writeSceneToPlayer();
+			final String choice = waitForChoiceInput( player);
+			
+			if(choice != "nameSet" && choice != "professionSet") {
+				scene = SceneManager.getChosenScene( player, writer, scene, choice );
+			}
 			if (scene == null) {
 				continue;
 			}
-			applySceneConsequencesOnPlayer( scene );
+			applySceneConsequencesOnPlayer( player );
 		}
 	}
 
 	private void writeSceneToPlayer(
-		final Scene scene
 	)
 	{
-		final String[] textLines = scene.getText().split( "\n" );
+		final String[] textLines = scene.getText().split( "<br>" );
 		final int numberOfOptions = scene.optionsSize();
 		writer.println( textLines.length + numberOfOptions );
 
@@ -78,19 +82,33 @@ public class SceneHandler
 	}
 
 	private void applySceneConsequencesOnPlayer(
-		final Scene scene
+		final Player player
 	)
 	{
-		/**
-		 * Para cena atual, aplicar consequências no player.
-		 */
+		if(scene.getId() == 141 && player.getInventory().contains( "corda" ) == false) {
+			scene = SceneManager.getSceneByID(142);
+			return;
+		}
+		
+		if(scene.getId() == 21) {
+			player.addToInventory( "corda" );
+			return;
+		}
+		
+		// Adicionar corda ao inventário
+		
+		// Adicionar bracelete ao inventário
+		
+		// Equipar bracelete
+		
 	}
 
 	private String waitForChoiceInput(
-		final int numberOfChoices
+		Player player
 	)
 		throws IOException
 	{
+		final int numberOfChoices = scene.optionsSize();
 		while (true) {
 			final String choice = reader.readLine();
 			if (isInvalidChoice( choice )) {
@@ -101,6 +119,23 @@ public class SceneHandler
 				server.shutDownTheseIps( Arrays.asList( playerIp ) );
 				throw new RuntimeException();
 			}
+			if(scene.getId() == 1) {
+				player.setName( choice );
+				scene = SceneManager.getSceneByID(2);
+				return "nameSet";
+			}
+			
+			if(scene.getId() == 2) {
+				try {
+					player.setProfession( Integer.valueOf( choice ) );
+					scene = SceneManager.getSceneByID(3);
+					return "professionSet";
+				} catch(NumberFormatException e) {
+					askToEnterAValidChoice();
+					continue;
+				}
+			}
+			
 			if (isOneOfDefaultChoices( choice )) {
 				return choice;
 			}

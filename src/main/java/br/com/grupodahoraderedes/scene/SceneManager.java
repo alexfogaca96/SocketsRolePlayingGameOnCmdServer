@@ -33,6 +33,15 @@ abstract class SceneManager
 	{
 		return SCENES.get( 0 );
 	}
+	
+	public static Scene getSceneByID(int ID) {
+		for (final Scene scene : SCENES) {
+			if (scene.getId() == ID) {
+				return scene;
+			}
+		}
+		throw new RuntimeException();
+	}
 
 	public static Scene getChosenScene(
 		final Player player,
@@ -49,6 +58,7 @@ abstract class SceneManager
 		if (choiceNumber < 1 || choiceNumber > currentScene.optionsSize()) {
 			return null;
 		}
+		
 		final int sceneReference = currentScene.getReference( choiceNumber );
 		for (final Scene scene : SCENES) {
 			if (scene.getId() == sceneReference) {
